@@ -1,0 +1,19 @@
+import math
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        l,r = 1,max(piles)
+
+        def is_possible(val):
+            running_sum = 0
+            for i in piles:
+                running_sum += math.ceil(i/val)
+            return running_sum <= h
+
+        while l <= r:
+            mid = (l+r)//2
+            if is_possible(mid):
+                r = mid - 1
+            else:
+                l = mid + 1
+        return l
+        
